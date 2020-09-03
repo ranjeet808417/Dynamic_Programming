@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int Maximum_Product(int n){
+if(n==1){
+        return 1;
+}
+int maxprod=0;
+for(int i=1;i<=n/2;i++){
+maxprod=max(maxprod,max(i*(n-i),i*Maximum_Product(n-i)));
+}
+
+return maxprod;
+
+}
+
+
+
+int main() {
+int n=10;
+cout<<Maximum_Product(n)<<endl;
+}
