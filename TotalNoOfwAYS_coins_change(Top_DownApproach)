@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int coins_change(int rupees,int n,int coins[],int** dp ){
+if(rupees==0){
+        dp[n][rupees]=1;
+        return dp[n][rupees];
+}
+else if( n==0 ){
+        dp[n][rupees]=0;
+        return 0;
+}
+else if(rupees<0){
+        return 0;
+}
+return dp[n][rupees]=coins_change(rupees-coins[n-1],n,coins,dp)+coins_change(rupees,n-1,coins,dp);
+
+}
+
+int main() {
+    int coins[]={1,2,3};
+    int size=sizeof(coins)/sizeof(coins[0]);
+    int rupees=4;
+    int **dp=new int*[size+1];
+    for(int i=0;i<size+1;i++){
+            dp[i]=new int[rupees+1];
+    }
+for(int i=0;i<size+1;i++){
+        for(int j=0;j<rupees+1;j++){
+                dp[i][j]=-1;
+        }
+}
+   
+    cout<<coins_change(rupees,size,coins,dp)<<endl;
+for(int i=0;i<size+1;i++){
+        for(int j=0;j<rupees+1;j++){
+               cout<<setw(2) <<dp[i][j];
+        }
+cout<<endl;
+}
+}
