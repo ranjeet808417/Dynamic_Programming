@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+int gold_mines(int mines[][4],int row,int col,int i,int j,int** dp){
+if(i<0 ||j<0||i>=row ||j>=col){
+        return 0;
+}
+else if(dp[i][j]!=-1){
+        return dp[i][j];
+}
+return dp[i][j]=mines[i][j]+max(gold_mines(mines,row,col,i-1,j+1,dp),max(gold_mines(mines,row,col,i,j+1,dp),gold_mines(mines,row,col,i+1,j+1,dp)));
+
+}
+
+int main() {
+
+    
+int gold[][4]=    {{10, 33, 13,  15},
+                  {22, 21, 04,   1},
+                  {5,  0,   2,   3},
+                  {0,  6, 14,    2}};
+                          
+        int m = 4, n = 4; 
+  int** dp=new int*[m];
+
+  for(int i=0;i<m;i++){
+dp[i]=new int[n];
+  }
+  for(int i=0;i<m;i++){
+          for(int j=0;j<n;j++){
+                  dp[i][j]=-1;
+          }
+  }
+  
+  int res=0;
+    for(int i=0;i<m;i++){
+    res=max(res,gold_mines(gold,m,n,i,0,dp));
+    }
+cout<<res<<endl;
+ for(int i=0;i<m;i++){
+          for(int j=0;j<n;j++){
+                  cout<<setw(3)<<dp[i][j];
+          }
+  cout<<endl;
+  }
+}
