@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int Nth_catalanNo(int n,int dp[]){
+dp[0]=1;
+  for(int num=1;num<=n;num++){
+        int sum=0;
+          for(int s=0;s<num;s++){
+          sum=sum+dp[s]*dp[num-s-1];
+
+          }
+        dp[num]=sum;
+  }
+   return dp[n];
+    }
+
+int main() {
+   int n=7;
+   int dp[n+1];
+   memset(dp,0,sizeof(dp));
+    cout<< Nth_catalanNo(n,dp);
+
+}
