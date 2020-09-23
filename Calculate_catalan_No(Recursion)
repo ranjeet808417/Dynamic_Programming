@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int Nth_catalanNo(int n){
+
+   if(n<=1){
+           
+           return 1;
+   }
+int sum=0;
+for(int i=0;i<n;i++){
+        sum+=Nth_catalanNo(i)*Nth_catalanNo(n-i-1);
+}
+  return sum;
+
+   
+    }
+
+int main() {
+   
+   
+    cout<< Nth_catalanNo(9);
+
+}
