@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int longest_repeating_subsequence(string s1,string s2,int l1,int l2){
+if(l1==0 || l2==0){
+        return 0;
+}
+if(s1[l1-1]==s2[l2-1] && l1 !=l2){
+        return 1+longest_repeating_subsequence(s1,s2,l1-1,l2-1);
+}
+else{
+        int left=longest_repeating_subsequence(s1,s2,l1,l2-1);
+        int right=longest_repeating_subsequence(s1,s2,l1-1,l2);
+        return max(left,right);
+}
+
+
+}
+int main() {
+   string s1="ranjeetkumaree";
+   string s2="ranjeetkumaree";
+    cout<<longest_repeating_subsequence(s1,s2,s1.length(),s2.length());
+}
