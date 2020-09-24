@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+#define NUM_DISTANCE 400
+int maximum_lengthOFsnake_sequence(int** path,int row,int col,int x,int y){
+if(x<0 || y<0 ||x>=row || y>=col){
+        return -1;
+}
+int right=maximum_lengthOFsnake_sequence(path,row,col,x,y+1);
+int down=maximum_lengthOFsnake_sequence(path,row,col,x+1,y);
+return 1+max(right,down);
+
+
+}
+int main() {
+ int row,col;
+ cin>>row>>col;
+ int** mat=new int*[row];
+ for(int i=0;i<row;i++){
+         mat[i]=new int[col];
+ }
+ for(int i=0;i<row;i++){
+         for(int j=0;j<col;j++){
+                 cin>>mat[i][j];
+         }
+ }
+ 
+ 
+ 
+    
+
+   cout<<maximum_lengthOFsnake_sequence(mat,row,col,0,0);
+}
