@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int longest_common_subsequence(string s1,string s2,int l1,int l2){
+if(l1==0 || l2==0){
+        return 0;
+}
+if(s1[l1-1]==s2[l2-1]){
+        return 1+longest_common_subsequence(s1,s2,l1-1,l2-1);
+}
+else{
+int left=longest_common_subsequence(s1,s2,l1,l2-1);
+int right=longest_common_subsequence(s1,s2,l1-1,l2);
+return max(left,right);
+
+}
+
+}
+int main() {
+   string s1="roussources";
+   string s2="enrichments";
+    cout<<longest_common_subsequence(s1,s2,s1.length(),s2.length());
+}
