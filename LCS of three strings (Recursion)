@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int LCS_of_threeString(string s1,string s2,string s3,int l1,int l2,int l3){
+if(l1==0||l2==0||l3==0){
+       
+        return 0;
+}
+
+else if(s1[l1-1]==s2[l2-1] && s2[l2-1]==s3[l3-1]){
+        return 1+LCS_of_threeString(s1,s2,s3,l1-1,l2-1,l3-1);
+}
+else{
+        int left=LCS_of_threeString(s1,s2,s3,l1-1,l2,l3);
+        int middle=LCS_of_threeString(s1,s2,s3,l1,l2-1,l3);
+        int right=LCS_of_threeString(s1,s2,s3,l1,l2,l3-1);
+        return max(left,max(middle,right));
+}
+
+}
+int main() {
+        string s1="gee";
+        string s2="gaee";
+        string s3="geme";
+int l1=s1.length();
+int l2=s2.length();
+int l3=s3.length();
+
+
+    cout<<LCS_of_threeString(s1,s2,s3,s1.length(),s2.length(),s3.length());
+}
