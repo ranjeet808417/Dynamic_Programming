@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int maxSumNotwoElementAdj(int arr[],int n){
+        int inc=arr[0];
+        int exc=0;
+      for(int i=1;i<n;i++){
+         int nexc=exc;
+         int ninc=inc;
+         inc=exc+arr[i];
+         exc=max(nexc,ninc);
+
+      }
+
+return max(inc,exc);
+}  
+int main() {
+      int arr[] = {5, 5, 10, 100, 10, 5}; 
+      
+      int n=sizeof(arr)/sizeof(arr[0]);
+    cout<<maxSumNotwoElementAdj(arr,n)<<endl;
+}
