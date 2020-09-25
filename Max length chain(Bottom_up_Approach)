@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct val{
+        int first;
+        int second;
+};
+bool compare(struct val&a,struct val&b){
+    return a.second<b.second;
+}
+int maxChainLen(struct val p[],int n)
+{
+sort(p,p+n,compare);
+int track[n];
+for(int i=0;i<n;i++){
+    track[i]=1;
+}                                       
+for(int i=1;i<n;i++){
+    for(int j=0;j<i;j++){
+        if(p[j].second < p[i].first ){
+          track[i]=max(track[i],track[j]+1);  
+        }
+    }
+}
+int m=0;
+for(int i=0;i<n;i++){
+    m=max(m,track[i]);
+}
+
+return m;
+
+//Your code here
+}
+         
+int main() {
+      int n;
+      cin>>n;
+      val arr[n];
+for(int i=0;i<n;i++){
+        cin>>arr[i].first;
+        cin>>arr[i].second;
+}
+    cout<<maxChainLen(arr,n)<<endl;
+}
