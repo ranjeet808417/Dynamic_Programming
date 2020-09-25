@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int maxmatrix(int **mat,int n,int m){
+    int temp[n+1][m+1];
+    for(int i=0;i<n+1;i++){
+        for(int j=0;j<m+1;j++){
+            temp[i][j]=0;
+        }
+    }
+    int size=0;
+    for(int i=1;i<n+1;i++){
+        for(int j=1;j<m+1;j++){
+             if(mat[i-1][j-1]){
+                 temp[i][j]=1+min(min(temp[i][j-1],temp[i-1][j]),temp[i-1][j-1]);
+            size=max(size,temp[i][j]);
+             }
+        }
+    }
+   return size; 
+}
+
+int main()
+ {
+	//code
+int t;
+cin>>t;
+while(t--){
+    int n,m;
+    cin>>n>>m;
+    int **mat=new int*[n];
+    
+    for(int i=0;i<n;i++){
+        mat[i]=new int[m];
+        for(int j=0;j<m;j++){
+            cin>>mat[i][j];
+        }
+    }
+   cout<<maxmatrix(mat,n,m)<<endl; 
+}
+
+	return 0;
+}
