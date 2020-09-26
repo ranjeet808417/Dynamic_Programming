@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+#define r 4
+#define c 6
+int maximum_path_sum(int mat[][c],int row,int col,int x,int y){
+if(x<0 || y<0 || x>=row||y>=col){
+        return 0;
+}
+int d_left=maximum_path_sum(mat,row,col,x+1,y-1);
+int down =maximum_path_sum(mat,row,col,x+1,y);
+int d_right=maximum_path_sum(mat,row,col,x+1,y+1);
+ return mat[x][y]+max(d_left,max(down,d_right));
+
+
+}
+int main() {
+   
+   
+   int mat[r][c] = {{10 ,10,  2 , 0 ,20 , 4},
+                   {1 , 0 , 0 ,30 , 2 , 5},
+                  { 0 ,10 , 4 , 0 , 2 , 0},
+                   {1 , 0 , 2 ,20 , 0 , 4}};
+       
+
+    int maximum=0;
+   for(int i=0;i<c;i++){
+   int val=maximum_path_sum(mat,r,c,0,i);
+   maximum=max(maximum,val);
+   }
+cout<<maximum<<endl;
+}
