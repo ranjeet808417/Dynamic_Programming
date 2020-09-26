@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+#define r 4
+#define c 6
+void maximum_path_sum(int mat[][c],int row,int col){
+for(int i=row-1;i>=0;i--){
+for(int j=0;j<col;j++){
+int d_left=0;
+int down=0;
+int d_right=0;
+if(i==row-1 || j==0){
+        d_left=0;
+}
+else{
+        d_left=mat[i+1][j-1];
+}
+if(i==row-1){
+        down=0;
+}
+else{
+        down=mat[i+1][j];
+}
+if(i==row-1 || j==col-1){
+d_right=0;
+}
+else{
+        d_right=mat[i+1][j+1];
+}
+mat[i][j]=mat[i][j]+max(d_left,max(down,d_right));
+
+
+
+}
+
+}
+
+
+
+}
+int main() {
+   
+   
+   int mat[r][c] = {{10 ,10,  2 , 0 ,20 , 4},
+                   {1 , 0 , 0 ,30 , 2 , 5},
+                  { 0 ,10 , 4 , 0 , 2 , 0},
+                   {1 , 0 , 2 ,20 , 0 , 4}};
+       int** dp=new int*[r];
+       for(int i=0;i<r;i++){
+               dp[i]=new int[c];
+       }
+       maximum_path_sum( mat,r,c);
+      for(int i=0;i<r;i++){
+              for(int j=0;j<c;j++){
+                      dp[i][j]=-1;
+              }
+      }
+    
+   
+  int maximum=0;
+   for(int i=0;i<c;i++){
+   maximum=max(maximum,mat[0][i]);
+   }
+cout<<maximum<<endl;
+}
