@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+int maximizeDiff0and1(string s,int length){
+int currmax=0;
+int globalmax=0;
+for(int i=0;i<length;i++){
+
+currmax=currmax+ (s[i]=='0'?1:-1);
+if(currmax<0){
+        currmax=0;
+}
+globalmax=max(globalmax,currmax);
+}
+return globalmax==0 ?-1:globalmax;
+
+}
+int main() {
+    string s="11000010001";
+    cout<<maximizeDiff0and1(s,s.length());
+}
