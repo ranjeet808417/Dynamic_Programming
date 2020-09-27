@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+
+int reach_given_score(int n,int* dp){
+   
+   if(n==0){
+           return 1;
+
+   }
+   else if(n<0){
+           return 0;
+   }
+   else if(dp[n]!=-1){
+           return dp[n];
+   }
+return dp[n]=reach_given_score(n-1,dp)+reach_given_score(n-2,dp)+reach_given_score(n-3,dp);
+
+
+}
+
+int main()
+ {
+	//code
+
+int t;
+cin>>t;
+while(t--){
+int n;
+cin>>n;
+int dp[n+1];
+for(int i=0;i<n+1;i++){
+        dp[i]=-1;
+}
+	cout<<reach_given_score(n,dp)<<endl;
+	
+
+}
+return 0;
+     
+ }
