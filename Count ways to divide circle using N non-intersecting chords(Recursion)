@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+int count_ways_toDivideCircle(int n){
+if(n==0){
+        return 1;
+}
+int temp=0;
+for(int i=0;i<=n-2;i++){
+temp=temp+count_ways_toDivideCircle(i)*count_ways_toDivideCircle(n-2-i);
+}
+return temp;
+
+}
+
+int main() {
+   int n;
+   cin>>n;
+    cout<<count_ways_toDivideCircle(2*n);
+}
