@@ -1,0 +1,50 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+int egg_dropping(int e,int f,int** dp){
+    if(f==0||f==1){
+        return f;
+    }
+    else if(dp[e][f]!=-1){
+        return dp[e][f];
+    }
+    if(e==1){
+        return f;
+    }
+    int minimum=INT_MAX;
+    
+    for(int k=1;k<=f;k++){
+        int temp=1+max(egg_dropping(e-1,k-1,dp),egg_dropping(e,f-k,dp));
+        minimum=min(minimum,temp);
+    }
+    
+    return dp[e][f]=minimum;
+    
+}
+
+
+int main()
+ {
+	
+	int t;
+	cin>>t;
+	while(t--){
+	    int e,f;
+	    cin>>e>>f;
+	  int **dp=new int*[e+1];
+	  for(int i=0;i<e+1;i++){
+	      dp[i]=new int[f+1];
+	  }
+	  for(int i=0;i<e+1;i++){
+	      for(int j=0;j<f+1;j++){
+	          dp[i][j]=-1;
+	      }
+	  }
+	  
+	    cout<<egg_dropping(e,f,dp)<<endl;
+	    
+	    
+	}
+		//code
+	return 0;
+}
