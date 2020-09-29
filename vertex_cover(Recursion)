@@ -1,0 +1,73 @@
+#include <iostream>
+#include<queue>
+#include<map>
+using namespace std;
+struct bstnode{
+int data;
+bstnode* left;
+bstnode* right;
+};
+bstnode* getnewnode(int data){
+        bstnode* temp=new bstnode();
+        temp->data=data;
+        temp->left=NULL;
+        temp->right=NULL;
+        return temp;
+}
+int vertex_cover(bstnode* root){
+if(root==NULL){
+        return 0;
+}
+if(root->left==NULL && root->right==NULL){
+        return 0;
+}
+int inc=0;
+inc=1+vertex_cover(root->left)+vertex_cover(root->right);
+int exc=0;
+if(root->left){
+        exc=1+vertex_cover(root->left->left)+vertex_cover(root->left->right);
+}
+if(root->right){
+        exc+=1+vertex_cover(root->right->left)+vertex_cover(root->right->right);
+}
+
+return min(inc,exc);
+
+}
+bstnode* insert(bstnode* root,int data){
+if(root==NULL){
+root=getnewnode(data);
+}
+else if(data<=root->data){
+        root->left=insert(root->left,data);
+}
+else if(data >root->data){
+root->right=insert(root->right,data);
+}
+return root;
+
+}
+
+
+
+int main() {
+bstnode* root=NULL;
+       root         = getnewnode(20); 
+    root->left                = getnewnode(8); 
+    root->left->left          = getnewnode(4); 
+    root->left->right         = getnewnode(12); 
+    root->left->right->left   = getnewnode(10); 
+    root->left->right->right  = getnewnode(14); 
+    root->right               = getnewnode(22); 
+    root->right->right        = getnewnode(25);
+ /*   root = insert(root, 8); 
+    root = insert(root, 22); 
+    root = insert(root, 4); 
+    root = insert(root, 12); 
+    root = insert(root, 25); 
+     root = insert(root, 10); 
+    root = insert(root, 14); */
+cout<<vertex_cover(root);
+
+
+}
