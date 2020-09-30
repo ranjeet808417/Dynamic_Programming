@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+void  longest_palindrome_substring(string str,int length){
+bool dp[length][length];
+int index=0;
+int maxlength=1;
+memset(dp,0,sizeof(dp));
+for(int i=0;i<length;i++){
+    dp[i][i]=1;
+}
+for(int i=0;i<length-1;i++){
+    if(str[i]==str[i+1]  ){
+        dp[i][i+1]=1;
+   if(maxlength<2){ index=i;
+    maxlength=2;
+   }
+    }
+
+    
+}
+
+for(int i=3;i<=length;i++){
+    for(int j=0;j<=length-i;j++){
+        int k=j+i-1;
+        if(str[j]==str[k] && dp[j+1][k-1]){
+       if(maxlength<i){
+            maxlength=i;
+            index=j;
+           
+         }
+         dp[j][k]=1;
+        }
+        
+        
+    }
+    
+    
+    
+}
+
+
+cout<<str.substr(index,maxlength);
+
+}
+
+int main()
+ {
+	//code
+int t;
+cin>>t;
+while(t--){
+    string str;
+    cin>>str;
+ longest_palindrome_substring(str,str.length());
+    cout<<endl;
+    
+}
+	return 0;
+}
