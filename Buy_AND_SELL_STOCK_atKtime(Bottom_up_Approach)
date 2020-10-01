@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int buy_sell_stock(int arr[],int n,int trans){
+int dp[trans+1][n];
+for(int i=0;i<trans+1;i++){
+ for(int j=0;j<n;j++){
+
+ if(i==0){
+         dp[i][j]=0;
+ }
+else if(j==0){
+        dp[i][j]=0;
+}
+else{
+        int maximum=INT_MIN;
+        for(int k=0;k<j;k++){
+                maximum=max(max(maximum,dp[i][j-1]),arr[j]-arr[k]+dp[i-1][k]);
+        }
+       dp[i][j]=maximum;
+}
+ }
+
+}
+
+return dp[trans][n-1];
+
+}
+
+int main() {
+  int price[] = {10, 22, 5, 75, 65, 80};
+  int n=sizeof(price)/sizeof(price[0]);
+  int trans=2;
+    cout<<buy_sell_stock(price,n,trans)<<endl;
+}
