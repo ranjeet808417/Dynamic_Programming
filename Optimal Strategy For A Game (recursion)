@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+int optimal_strategy(int arr[],int s,int e){
+    
+  if(s>e){
+      return 0;
+  }
+  
+  
+  int first=0,second=0;
+  first=arr[s]+min(optimal_strategy(arr,s+2,e),optimal_strategy(arr,s+1,e-1));
+  second=arr[e]+min(optimal_strategy(arr,s,e-2),optimal_strategy(arr,s+1,e-1));
+  return max(first,second);
+    
+    
+}
+
+int main()
+ {
+	
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int arr[n];
+	    for(int i=0;i<n;i++){
+	        cin>>arr[i];
+	    }
+	   
+            cout<<optimal_strategy(arr,0,n-1)<<endl;
+	    
+	}
+	
+	//code
+	return 0;
+}
