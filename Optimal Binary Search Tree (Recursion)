@@ -1,0 +1,43 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+int frequencysum(int freq[],int s,int e){
+        int sum=0;
+        for(int i=s;i<=e;i++){
+                sum+=freq[i];
+        }
+return sum;
+}
+int optimal_strategy(int freq[],int s,int e){
+  if(s>e){
+          return 0;
+  }  
+  else if(s==e){
+          return freq[s];
+
+  }
+    
+int fsum=frequencysum(freq,s,e);
+int res=INT_MAX;
+for(int i=s;i<=e;i++){
+int temp=optimal_strategy(freq,s,i-1)+optimal_strategy(freq,i+1,e);
+res=min(res,temp);
+
+}
+return res+fsum;
+
+}
+
+int main()
+ {
+	
+	
+	    int keys[] = {10, 12, 20};  
+    int freq[] = {34, 8, 50};  
+    int n = sizeof(freq) / sizeof(freq[0]);  
+    cout << "Cost of Optimal BST is " << optimal_strategy( freq, 0,n-1);  
+	
+	
+	//code
+	return 0;
+}
