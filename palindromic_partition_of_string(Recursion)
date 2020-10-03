@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool ispalindrome(string str,int length){
+for(int i=0;i<length/2;i++){
+        if(str[i]!=str[length-1-i]){
+                return false;
+        }
+}
+return true;
+}
+void  palindrome_partition(string str,int s,int n,vector<vector<string>>&allpart,vector<string>&currpart){
+if(s>=n){
+allpart.push_back(currpart);
+return;
+}
+
+
+for(int i=s;i<n;i++ ){
+
+if(ispalindrome(str.substr(s,i-s+1),i-s+1)){
+        currpart.push_back(str.substr(s,i-s+1));
+        palindrome_partition(str,i+1,n,allpart,currpart);
+        currpart.pop_back();
+}
+
+
+}
+
+
+}
+
+int main() {
+    string str ="ababbbabbababa";
+    vector<vector<string>>allpart;
+    vector<string>currpart;
+    palindrome_partition(str,0,str.length(),allpart,currpart);
+int res=INT_MAX;
+for(int i=0;i<allpart.size();i++){
+int a=allpart[i].size();
+res=min(res,a);
+}
+cout<<res-1;
+}
