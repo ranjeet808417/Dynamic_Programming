@@ -1,0 +1,26 @@
+#include <iostream>
+#include<climits>
+using namespace std;
+int max_product(int n,int dp[]){
+if(n==1){
+        return 1;
+}
+else if(dp[n]!=-1){
+        return dp[n];
+}
+int res=INT_MIN;
+for(int i=1;i<=n/2;i++){
+res=max(res,max(i*(n-i),i*max_product(n-i,dp)));
+
+}
+dp[n]=res;
+return res;
+}
+
+
+int main() {
+  int n=10;
+   int dp[n+1];
+   memset(dp,-1,sizeof(dp));
+    cout<<max_product(10,dp);
+}
