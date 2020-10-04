@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+#include<climits>
+using namespace std;
+int kadans(int dp[],int row){
+    int currmax=dp[0];
+int globalmax=dp[0];
+for(int i=1;i<row;i++){
+currmax=max(currmax+dp[i],dp[i]); 
+if(currmax>globalmax){
+        globalmax=currmax;
+        
+}
+ if(currmax<0){
+        currmax=0;
+}
+}
+return globalmax;
+    
+}
+void insert(int dp[],int row,int c,int** mat){
+    for(int i=0;i<row;i++){
+       dp[i]=dp[i]+mat[i][c]; 
+        
+    }
+    
+    
+}
+int maaximum_sum_rect(int** mat,int r,int c){
+    int dp[r];
+   int globalmax=INT_MIN;
+    for(int L=0;L<c;L++){
+      memset(dp,0,sizeof(dp));
+        for(int R=L;R<c;R++){
+            
+            insert(dp,r,R,mat);
+            int currmax=kadans(dp,r);
+            if(currmax>globalmax){
+                globalmax=currmax;
+            }
+            
+        }
+        
+        
+    }
+    
+    
+   return globalmax; 
+    
+    
+}
+
+int main()
+ {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int r,c;
+	    cin>>r>>c;
+	   int** mat=new int*[r];
+	   for(int i=0;i<r;i++){
+	       mat[i]=new int[c];
+	   }
+	   for(int i=0;i<r;i++){
+                   for(int j=0;j<c;j++){
+                           cin>>mat[i][j];
+                   }
+           }
+	  cout<<maaximum_sum_rect(mat,r,c)<<endl;  
+	}
+	
+	return 0;
+}
